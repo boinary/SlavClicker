@@ -45,7 +45,7 @@ var ccc = 0;
 var spaceCount = 0;
 var count = 0;
 
-var score = 0;
+var score = 500;
 setSize(sizeScreen, sizeScreen);
 
 function start(){
@@ -88,20 +88,20 @@ function slav(e){
         if(score >= ushankaPrice){
             // the exponential prices of ushankas; 100, 200, 400, 800, 1600
             if(score >= 100){
-                upgradeOne();
                 amountUshanka = 1;
+                upgradeOne();
             }else if(score >= 200 && amountUshanka == 1){
-                upgradeTwo();
                 amountUshanka = 2;
+                upgradeTwo();
             }else if(score >= 400 && amountUshanka == 2){
-                upgradeThree();
                 amountUshanka = 3;
+                upgradeThree();
             }else if(score >= 800 && amountUshanka == 3){
-                upgradeFour();
                 amountUshanka = 4;
+                upgradeFour();
             }else if(score >= 1600 && amountUshanka == 4){
-                upgradeFive();
                 amountUshanka = 5;
+                upgradeFive();
             }
             score -= ushankaPrice;
             ushankaPrice *= 2;
@@ -116,12 +116,22 @@ function slav(e){
             if(amountUshanka == 1){
                 upgradeOne();
             }else if(amountUshanka == 2){
+                upgradeOne();
                 upgradeTwo();
             }else if(amountUshanka == 3){
+                upgradeOne();
+                upgradeTwo();
                 upgradeThree();
             }else if(amountUshanka == 4){
+                upgradeOne();
+                upgradeTwo();
+                upgradeThree();
                 upgradeFour();
             }else if(amountUshanka == 5){
+                upgradeOne();
+                upgradeTwo();
+                upgradeThree();
+                upgradeFour();
                 upgradeFive();
             }
             add(notEnough);
@@ -178,7 +188,7 @@ function upgradeOne(){
 }
 function upgradeTwo(){
     ushankaHatTwo = new WebImage(ushanka);
-    ushankaHatTwo.setPosition(getWidth()/2-ushankaHat.getWidth(), 39);
+    ushankaHatTwo.setPosition(getWidth()/2-ushankaHatTwo.getWidth(), 39);
     ushankaHatTwo.setSize(40,30);
     add(ushankaHatTwo);
     
@@ -186,7 +196,7 @@ function upgradeTwo(){
 }
 function upgradeThree(){
     ushankaHatThree = new WebImage(ushanka);
-    ushankaHatThree.setPosition(getWidth()/2-ushankaHatTwo.getWidth()-7, 25.5);
+    ushankaHatThree.setPosition(getWidth()/2-ushankaHatThree.getWidth()-7, 25.5);
     ushankaHatThree.setSize(40,30);
     add(ushankaHatThree);
     
@@ -194,7 +204,7 @@ function upgradeThree(){
 }
 function upgradeFour(){
     ushankaHatFour = new WebImage(ushanka);
-    ushankaHatFour.setPosition(getWidth()/2-ushankaHatThree.getWidth(), 15.5);
+    ushankaHatFour.setPosition(getWidth()/2-ushankaHatFour.getWidth(), 15.5);
     ushankaHatFour.setSize(40,30);
     add(ushankaHatFour);
     
@@ -202,7 +212,7 @@ function upgradeFour(){
 }
 function upgradeFive(){
     ushankaHatFive = new WebImage(ushanka);
-    ushankaHatFive.setPosition(getWidth()/2-ushankaHatFour.getWidth()-7, 5.5);
+    ushankaHatFive.setPosition(getWidth()/2-ushankaHatFive.getWidth()-7, 5.5);
     ushankaHatFive.setSize(40,30);
     add(ushankaHatFive);
     
@@ -210,7 +220,7 @@ function upgradeFive(){
 }
 function squatPerSecond(){
     score += amountSquatPerSecond;
-    println(score + " +1");
+    println(score + " +" + amountSquatPerSecond);
 }
 function russianBackground(){
     var red = new Rectangle(getWidth(), getHeight()/3);
@@ -231,3 +241,127 @@ function upgradeText(){
     // Random position within white part of russian flag
     // (Randomizer.nextInt(0, getWidth()-text.getWidth()), Randomizer.nextInt(0, getHeight()/3-text.getHeight()));
 }
+/*
+function scoreBoy(){
+    if(score >= 150 && score < 200){
+        var ushankaHat = new WebImage(ushanka);
+        ushankaHat.setPosition(getWidth()/2-ushankaHat.getWidth(), 39);
+        ushankaHat.setSize(40,30);
+        add(ushankaHat);
+        upgradeText();
+        text.setColor(Color.cyan);
+    }else if(score >= 200 && score < 250){
+        var ushankaHatTwo = new WebImage(ushanka);
+        ushankaHatTwo.setPosition(getWidth()/2-ushankaHatTwo.getWidth()-7, 25.5);
+        ushankaHatTwo.setSize(40,30);
+        add(ushankaHatTwo);
+        upgradeText();
+        text.setColor(Color.purple);
+    }else if(score >= 250 && score < 300){
+        var ushankaHatThree = new WebImage(ushanka);
+        ushankaHatThree.setPosition(getWidth()/2-ushankaHatThree.getWidth(), 15.5);
+        ushankaHatThree.setSize(40,30);
+        add(ushankaHatThree);
+        upgradeText();
+        text.setColor(Color.green);
+    }else if(score >= 300 && score < 350){
+        var ushankaHatFour = new WebImage(ushanka);
+        ushankaHatFour.setPosition(getWidth()/2-ushankaHatFour.getWidth()-7, 5.5);
+        ushankaHatFour.setSize(40,30);
+        add(ushankaHatFour);
+        upgradeText();
+        text.setColor(Color.red);
+    }
+}
+*/
+
+
+/*
+var score = 0;
+function start(){
+    slavSquat = new WebImage(bear);
+    slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
+    slavSquat.setPosition(slavX, slavY);
+    
+    spaceText = new Text("Press Space to Squat","12pt Arial");
+    spaceText.setColor(Color.black);
+    spaceText.setPosition(0, 15);
+    add(spaceText);
+    
+    upgradeButtons();
+    add(slavSquat);
+    
+    keyDownMethod(slav);
+}
+function slav(e){
+    if(ccc >= 1){
+        remove(text);
+    }
+    scoreBoy();
+    if(tf == true){
+        spaceCount++;
+    }
+    remove(slavSquat);
+    if(spaceCount > 0){
+        remove(spaceText);
+        tf = false;
+    }
+    if(e.keyCode == Keyboard.SPACE){
+        if(count == 0){
+            slavSquat = new WebImage(bearSquat);
+            slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
+            slavSquat.setPosition(slavX, slavY);
+            add(slavSquat);
+            count++;
+            score++;
+            println(score);
+        }else if(count == 1){
+            slavSquat = new WebImage(bear);
+            slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
+            slavSquat.setPosition(slavX, slavY);
+            add(slavSquat);
+            count++;
+            score++;
+            println(score);
+        }else if(count == 2){
+        slavSquat = new WebImage(uberSlav);
+        slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
+        slavSquat.setPosition(slavX, slavY);
+        add(slavSquat);
+        count++;
+        score++;
+        println(score);
+    }else if(count == 3){
+        slavSquat = new WebImage(bear);
+            slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
+            slavSquat.setPosition(slavX, slavY);
+            add(slavSquat);
+            count = 0;
+            score++;
+            println(score);
+    }
+    }else{
+        slavSquat = new WebImage(bear);
+        slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
+        slavSquat.setPosition(slavX, slavY);
+        add(slavSquat);
+    }
+}
+function upgradeButtons(){
+    var red = new Rectangle(getWidth(), getHeight()/3);
+    red.setPosition(0, getHeight()-red.getHeight());
+    red.setColor(Color.red);
+    add(red);
+    
+    var blue = new Rectangle(getWidth(), getHeight()/3);
+    blue.setPosition(0, getHeight()-blue.getHeight()*2);
+    blue.setColor(Color.blue);
+    add(blue);
+}
+function upgradeText(){
+    text = new Text("Upgrade!", "12pt Arial");
+    text.setPosition(Randomizer.nextInt(0, getWidth()-text.getWidth()), Randomizer.nextInt(0, getHeight()/3-text.getHeight()));
+    text.setColor(Color.orange);
+    add(text);
+}
+*/
