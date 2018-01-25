@@ -1,9 +1,10 @@
 // GIT
 // You've been save - Boinary
 // -=-=-=-=-=-=-=-=-=-=-=-=-=
-// Recommendations: Buy hats as upgrades for more Sq/sec, increasing by a power of 3, hat prices grow exponentially,
+// Recommendations: Buy hats as upgrades for more Sq/sec, increasing by a power of 2, hat prices grow exponentially,
 // Buy molotovs for +1 Sq/per click, Buy new bears as avatar at high price, 
-// molotov prices grow constantly
+// molotov prices grow constantly vs exponentially
+// Space = '+ 1 +(molotov bonus),' U = next ushanka upgrade, M = next Molotov ugrade
 //"SquatSlav2"
 var bearUshanka = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABsCAYAAACVWrdDAAAEC0lEQVR4Xu2dsU5VQRCGxd7Cys6C1pjQ+gK8ggXxDYiFodRKS2JhfANDiImJoaWCSklMIDEWt6Gws7KwV3OCmLsDnP/8d2bO3j33pyFkd2b3/t/OzO5yOKzdauzrw/7+n/kpfzk9dX2CzycnlP3R8fEaZQA6hzqLnNhNvgRgDJV7xhAAAQjNGqHOMtgwK/759uuLKaz/m8n5xfdXb58tPDVUI7w1YTIACvE74YMgCMDAXc+1q7+D4IwCARgIoMsxSkELZ9qbDYfWgE78y1x/CWL+Z08dmJ+djQjVgDl1/keA4RklfudWAJwnX2+QCoAAeNcQZ7+3s1nc/WztHhYO9nY2OYemN/L39fZGYfHx4KD4eTabubbyLmPXJx9oLAADhcrqJgBZyg70KwADhcrqZgE8uH+3GGrj6Xtq6LM3j4v+377/7LVXDTBFWACo9ebvrAjwa+jyIAAu+fzGywbg4e+z3g+1tXtIbe2pzn45eQ8CwGsWaiEAoXLyzgSA1yzUAgGwg9lzgd332/7sOQDVAOsf1YTma4AAhK73q84UAckCI/cCgBQKbreCX5NTQ0f0/j4BTaa5GiAACGlyuwAkC4zcCwBSKLgdCR483Ojuzn/8KsZ88e5TsfWvfg4QgNHXRDmgAAhAqgJLl4JePnlUPOezfu9OqgBe51ZA73ytv9FrgACURVkAQIgoArw5xGm/8gCiBWB5RI/fXA2IFkAAyF2QALBLBvRnd0ECsGQA0HSi9+lef3a+zdcAAUAKJKcgNLx3xWanPEXAyAev5lKQXSFoxWe3eyNKAJyEBMApoNdcALwKOu1XDoBTryvmbE2JFry5GiAA0QoYf+xVhHc6igABKBRo7iDGRgBa8dk5Hs1XACo/BCAAApD7WIpSUPBtKJtTa+d4tO+382v+sZTs62O0AFA7mp8AIAWd7QLgFNBrvnQA7NPQqGh6Bahtj2rS6ClIAMolIQDJIaIISBYYua8OYOp/AYMAoPb0FCQA/QgEAC3R5HYBSBYYuQ8HoJSDJE/ehgqAAHAKVO6tFNQ6ADbloMupynqkD2/fH+SOAAHgmAkAp1d4bwEIl5RzWB2AnS77+wB0ucXJkd87/WUdbA0QgOAXNglAfxQpAvKzTO8IzQFoPcdbGvYdcbZ99HMAqgECQIZsdA0QAAGgFEDb6PQUZGfLRkTtuyEkIKKBBEb27hogAOW+HgkeXoQFQADYRVf0n1wKYiMCCRC9K0IHIxfNBYzDa4AAcBQEwLzNnJPP31sApg5AKak/StIjQAAEwHVd7M/yArDaANDdEDoHsPfraDy0otH//UL2bHt6DUCCCACLjOwvAJVrgABUBkAGDN0dAWYdTq4GsAKw/QWAVSy4vwAEC8q6ax3AX5406rrzefpzAAAAAElFTkSuQmCC";
 var bear = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABsCAYAAACVWrdDAAADnUlEQVR4Xu2dIXZUQRBFyQIQKBwCG4NlA9kCIoctoGJR2Ci2wIlgC9kAFoNF4FAIFgC6K+f8NzWv6vf0zMV2VXXPu11V3X9+hqtni/17uLv5t7Xk2/vHK+cjdcePa7MW63zQY327BeqODwBBHgCTBQKACeDY0naon9tjzr4EHSrksXYAEKegY4U91A8AADh0r5TZbZ774ywPdzebE9/eP6YWFuNdYgYAILVl6o0BUK9pKiIAUnIVG8eLUazhquar5WTjXVwPAIDaQs3jAGgWWIUHgFKoeTwCuH71YpjxzYevqRV8//xusP/x60/KPxq7PeHkvw8AgLU/fGcA+BpaEQBgyec7nzoAtyfQA8wmDIDJpyAAAMCv81sRVA+IvvFeEM/90d69B6hPr+4Jy/cAAKgtYI6TAaaArjsAXAWT/ge8GJWMuG3ufp+gFrNcDwCAQto8DoBmgVV4ACiFiseV4MXT7R7u5++/w5wfv3wbjv7T7wEA2H1PjBMCAACtCpxcCfr0/u3wotXrl89bBXCDRwHd9cZ4u/cAAIxNGQAiRcgAt4aY/hcPoFqALI/q+ZfrAdUCACB5CgJAdssI++wpCAAnBkAtp/qc7saL612+BwBAKdBcgtT07o7tLnlkwM4Xr+VKUNwhasd3j7sZBQCTEABMAV13ALgKmv4XB8DU64l7tqdUC75cDwBAtQIhXvZRhLscMgAAgwLLXcSyGaB2fHeNV+sFwOSXAAAAgN7XUihBxU9DszV1do1X5/64vuVfS+l+fKw2gBpX6wOAUtAcB4ApoOt+cgDi29CqaboCzPZXPWn3EgSAcUsAoDlFyIBmgVX46QDO/S9gFAA13l6CALCNAABqizaPA6BZYBW+HAAlR0nefAwFAAByCky2pgStDiBbctTDqcl6tE8ffz/IzgAA5JgBIKdXuTUAyiXNBZwOIC43+32AeriVk6Pfuv3HOrI9AADFP9gEgO0sIgP6q8zmDMsBWL3GRxrxN+Li+O73ANUDAJBM2eoeAAAApBRQx+j2EhRXm82I2c+GlICKhhJY+ds9AADjuV4JXt6EAQCA7KYb7M+uBGUzQglQfSpSFyOL5hHO5T0AADkKAAi/Zp6Tz7cGwLkDoCRtZ0l7BgAAANbjYr/KA+CyAahnQ+oekH2+ruZTO1r9v1/KPzve3gOUIADIIkvaA2ByDwDAZADJhEmbK8DZgGfXA7ICZO0BkFWs2B4AxYJmw60O4D9NmWi6X5/1twAAAABJRU5ErkJggg==";
@@ -46,14 +47,16 @@ var ccc = 0;
 var spaceCount = 0;
 var count = 0;
 
-var score = 0;
-setSize(sizeScreen, sizeScreen);
-
 //Adjustable variables. Change these to make the game easier or harder.
 
 var costMultiplier = 2; //Controls the growth of ushanka prices
 var ushankaIncrease = 1; //Controls how much the Squat/sec value increases by with each upgrade
 var baseSquatPerSecond = 1; //Controls the initial Squat/sec value at the first upgrade
+var molotovBonus = 0;
+
+var addToScore = 1 + molotovBonus;
+var score = 0;
+setSize(sizeScreen, sizeScreen);
 
 function start(){
     init();
@@ -147,6 +150,8 @@ function slav(e){
             }
             add(notEnough);
         }
+    }else if(e.keyCode == Keyboard.letter('M')){
+        
     }else if(e.keyCode == Keyboard.SPACE){
         remove(notEnough);
         remove(slavSquat);
@@ -156,7 +161,7 @@ function slav(e){
             slavSquat.setPosition(slavX, slavY);
             add(slavSquat);
             count++;
-            score++;
+            score += addToScore;
             println(score);
         }else if(count == 1){
             slavSquat = new WebImage(bear);
@@ -164,7 +169,7 @@ function slav(e){
             slavSquat.setPosition(slavX, slavY);
             add(slavSquat);
             count++;
-            score++;
+            score += addToScore;
             println(score);
         }else if(count == 2){
         slavSquat = new WebImage(uberSlav);
@@ -172,7 +177,7 @@ function slav(e){
         slavSquat.setPosition(slavX, slavY);
         add(slavSquat);
         count++;
-        score++;
+        score += addToScore;
         println(score);
         }else if(count == 3){
             slavSquat = new WebImage(bear);
@@ -180,18 +185,10 @@ function slav(e){
                 slavSquat.setPosition(slavX, slavY);
                 add(slavSquat);
                 count = 0;
-                score++;
+                score += addToScore;
                 println(score);
         }
     }
-    //In its current state, the following section causes a weird third leg to appear when a key other than space or U is pressed. Is this supposed to happen?
-    
-    /*else{
-        slavSquat = new WebImage(bear);
-        slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
-        slavSquat.setPosition(slavX, slavY);
-        add(slavSquat);
-    }*/
 }
 function upgradeOne(){
     bear = bearUshanka;
@@ -206,6 +203,8 @@ function upgradeTwo(){
     ushankaHatTwo.setSize(40,30);
     add(ushankaHatTwo);
     
+    //ushankaHatTwo.setPosition(getWidth()/2-ushankaHatTwo.getWidth(), 39);
+    
     squatPerSecond += ushankaIncrease;
 }
 function upgradeThree(){
@@ -213,6 +212,8 @@ function upgradeThree(){
     ushankaHatThree.setPosition(getWidth()/2-ushankaHatThree.getWidth()-7, 25.5);
     ushankaHatThree.setSize(40,30);
     add(ushankaHatThree);
+    
+    //ushankaHatThree.setPosition(getWidth()/2-ushankaHatThree.getWidth()-7, 25.5);
     
     squatPerSecond += ushankaIncrease;
 }
@@ -222,6 +223,8 @@ function upgradeFour(){
     ushankaHatFour.setSize(40,30);
     add(ushankaHatFour);
     
+    //ushankaHatFour.setPosition(getWidth()/2-ushankaHatFour.getWidth(), 15.5);
+    
     squatPerSecond += ushankaIncrease;
 }
 function upgradeFive(){
@@ -229,6 +232,8 @@ function upgradeFive(){
     ushankaHatFive.setPosition(getWidth()/2-ushankaHatFive.getWidth()-7, 5.5);
     ushankaHatFive.setSize(40,30);
     add(ushankaHatFive);
+    
+    //ushankaHatFive.setPosition(getWidth()/2-ushankaHatFive.getWidth()-7, 5.5);
     
     squatPerSecond += ushankaIncrease;
 }
@@ -252,6 +257,4 @@ function upgradeText(){
     text.setPosition(getWidth()-text.getWidth(), 15);
     text.setColor(Color.orange);
     add(text);
-    // Random position within white part of russian flag
-    // (Randomizer.nextInt(0, getWidth()-text.getWidth()), Randomizer.nextInt(0, getHeight()/3-text.getHeight()));
 }
