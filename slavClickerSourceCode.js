@@ -1,7 +1,7 @@
 // GIT
 // You've been save - Boinary
 // -=-=-=-=-=-=-=-=-=-=-=-=-=
-// Recommendations: Buy hats as upgrades for +1 Sq/sec, hat prices grow exponentially,
+// Recommendations: Buy hats as upgrades for more Sq/sec, increasing by a power of 3, hat prices grow exponentially,
 // Buy molotovs for +1 Sq/per click, Buy new bears as avatar at high price, 
 // molotov prices grow constantly
 //"SquatSlav2"
@@ -24,12 +24,13 @@ var text;
 var tf = true;
 var sizeScreen = 200;
 
+var squatPerSecond = 0;
+
 var ushankaHatTwo;
 var ushankaHatThree;
 var ushankaHatFour;
 var ushankaHatFive;
 
-var amountSquatPerSecond = 1;
 var amountUshanka = 0;
 var amountMolotov = 0;
 var amountBearskin = 0;
@@ -47,6 +48,12 @@ var count = 0;
 
 var score = 0;
 setSize(sizeScreen, sizeScreen);
+
+//Adjustable variables. Change these to make the game easier or harder.
+
+var costMultiplier = 2; //Controls the growth of ushanka prices
+var ushankaIncrease = 1; //Controls how much the Squat/sec value increases by with each upgrade
+var baseSquatPerSecond = 1; //Controls the initial Squat/sec value at the first upgrade
 
 function start(){
     init();
@@ -87,26 +94,30 @@ function slav(e){
     if(e.keyCode == Keyboard.letter('U')){
         if(score >= ushankaPrice){
             // the exponential prices of ushankas; 100, 200, 400, 800, 1600
-            if(score >= 100){
+            if(score >= ushankaPrice && amountUshanka == 0){
                 amountUshanka = 1;
                 upgradeOne();
-            }else if(score >= 200 && amountUshanka == 1){
+            }else if(score >= ushankaPrice && amountUshanka == 1){
                 amountUshanka = 2;
                 upgradeTwo();
-            }else if(score >= 400 && amountUshanka == 2){
+            }else if(score >= ushankaPrice && amountUshanka == 2){
                 amountUshanka = 3;
                 upgradeThree();
-            }else if(score >= 800 && amountUshanka == 3){
+            }else if(score >= ushankaPrice && amountUshanka == 3){
                 amountUshanka = 4;
                 upgradeFour();
-            }else if(score >= 1600 && amountUshanka == 4){
+            }else if(score >= ushankaPrice && amountUshanka == 4){
                 amountUshanka = 5;
                 upgradeFive();
             }
             score -= ushankaPrice;
-            ushankaPrice *= 2;
+            ushankaPrice *= costMultiplier;
             upgradeText();
             ccc++;
+            println("The next ushanka costs " + ushankaPrice + " squats.");
+            if (squatPerSecond == 1){
+                setTimer(addSquats, 1000);
+            }
         }else{
             notEnough = new Text("Not enough Squats!", "12pt Arial");
             notEnough.setPosition(0, 15);
@@ -163,28 +174,31 @@ function slav(e){
         count++;
         score++;
         println(score);
-    }else if(count == 3){
-        slavSquat = new WebImage(bear);
-            slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
-            slavSquat.setPosition(slavX, slavY);
-            add(slavSquat);
-            count = 0;
-            score++;
-            println(score);
+        }else if(count == 3){
+            slavSquat = new WebImage(bear);
+                slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
+                slavSquat.setPosition(slavX, slavY);
+                add(slavSquat);
+                count = 0;
+                score++;
+                println(score);
+        }
     }
-    }else{
+    //In its current state, the following section causes a weird third leg to appear when a key other than space or U is pressed. Is this supposed to happen?
+    
+    /*else{
         slavSquat = new WebImage(bear);
         slavSquat.setSize(BEAR_WIDTH, BEAR_HEIGHT);
         slavSquat.setPosition(slavX, slavY);
         add(slavSquat);
-    }
+    }*/
 }
 function upgradeOne(){
     bear = bearUshanka;
     bearSquat = bearSquatUshanka;
     uberSlav = uberSlavUshanka;
     
-    setTimer(squatPerSecond, 1000);
+    squatPerSecond = baseSquatPerSecond;
 }
 function upgradeTwo(){
     ushankaHatTwo = new WebImage(ushanka);
@@ -192,7 +206,7 @@ function upgradeTwo(){
     ushankaHatTwo.setSize(40,30);
     add(ushankaHatTwo);
     
-    amountSquatPerSecond = 2;
+    squatPerSecond += ushankaIncrease;
 }
 function upgradeThree(){
     ushankaHatThree = new WebImage(ushanka);
@@ -200,7 +214,7 @@ function upgradeThree(){
     ushankaHatThree.setSize(40,30);
     add(ushankaHatThree);
     
-    amountSquatPerSecond = 3;
+    squatPerSecond += ushankaIncrease;
 }
 function upgradeFour(){
     ushankaHatFour = new WebImage(ushanka);
@@ -208,7 +222,7 @@ function upgradeFour(){
     ushankaHatFour.setSize(40,30);
     add(ushankaHatFour);
     
-    amountSquatPerSecond = 4;
+    squatPerSecond += ushankaIncrease;
 }
 function upgradeFive(){
     ushankaHatFive = new WebImage(ushanka);
@@ -216,11 +230,11 @@ function upgradeFive(){
     ushankaHatFive.setSize(40,30);
     add(ushankaHatFive);
     
-    amountSquatPerSecond = 5;
+    squatPerSecond += ushankaIncrease;
 }
-function squatPerSecond(){
-    score += amountSquatPerSecond;
-    println(score + " +" + amountSquatPerSecond);
+function addSquats(){
+    score += squatPerSecond;
+    println(score + " + " + squatPerSecond);
 }
 function russianBackground(){
     var red = new Rectangle(getWidth(), getHeight()/3);
